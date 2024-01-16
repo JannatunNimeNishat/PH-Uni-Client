@@ -1,0 +1,6 @@
+/* re-setting the default styling */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
