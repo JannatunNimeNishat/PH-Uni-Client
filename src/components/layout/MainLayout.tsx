@@ -6,6 +6,7 @@ import {
 } from "@ant-design/icons";
 import { createElement } from "react";
 import { NavLink, Outlet } from "react-router-dom";
+import { adminSidebarItems } from "../../routes/admin.routes";
 /* import Sider from "antd/es/layout/Sider";
 import { Content, Footer, Header } from "antd/es/layout/layout"; */
 
@@ -30,7 +31,8 @@ const { Content, Footer, Header, Sider } = Layout;
  * iii. nested hole children props er modde asbe. Amra jodi akta drop down cai kono akta level er under e nested obostai taile amra children pros er modde array of object akare dite hobe. agar motoi protita object key,props hold korbe.
  */
 
-const items: MenuProps["items"] = [
+ //* Hard Coded items
+/** const items: MenuProps["items"] = [
   {
     key: "Dashboard",
     label: <NavLink to="/admin/dashboard">Dashboard</NavLink>,
@@ -53,7 +55,7 @@ const items: MenuProps["items"] = [
       },
     ],
   },
-];
+]; */
 
 const MainLayout = () => {
   return (
@@ -83,7 +85,7 @@ const MainLayout = () => {
           theme="dark"
           mode="inline"
           defaultSelectedKeys={["4"]}
-          items={items}
+          items={adminSidebarItems} //! pragmatical items
         />
       </Sider>
       <Layout>
