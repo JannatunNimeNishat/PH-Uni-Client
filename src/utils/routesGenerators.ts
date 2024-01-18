@@ -1,16 +1,17 @@
-import { ReactNode } from "react";
 
-type TUserPath = {
+import { TRoute, TUserPath } from "../types"; //coming from barrel
+
+/* type TUserPath = {
     name:string;
     path?:string;
     element?:ReactNode;
     children?:TUserPath[];
-}
+} */
 
-type TRoute = {
+/* type TRoute = {
     path:string;
     element:ReactNode;
-}
+} */
 
 export const routeGenerator = (items:TUserPath[])=>{
      const routes = items.reduce((acc:TRoute[],item)=>{

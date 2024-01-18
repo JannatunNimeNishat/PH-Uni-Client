@@ -5,15 +5,15 @@ import CreateFaculty from "../pages/admin/CreateFaculty";
 import CreateStudent from "../pages/admin/CreateStudent";
 import { NavLink } from "react-router-dom";
 
-type TRoute = {
+/* type TRoute = {
     path:string;
     element:ReactNode;
-}
-type TAdminSidebarItem ={
+} */
+/* type TAdminSidebarItem ={
     key:string;
     label:ReactNode; // reactNode er modde string o take so direct ReactNode deya jabe
     children?:TAdminSidebarItem[]; // children ta asole TAdminSidebarItems er akta array hobe (key,label). r children ta optional na taklao problem nai
-}
+} */
 
 /** amra acna e dynamically adminSideBarItems r adminRoutes banasci jate kore ak jaigai change korlai (adminPaths) 2 jaiga tai update hoye jai. code maintability baranor jonno.
  * 
@@ -50,18 +50,13 @@ export const adminPaths = [
                 name:'Create Student',
                 path:'create-student',
                 element:<CreateStudent />
-            },
-            /* {
-                name:'Create User',
-                path:'create-user',
-                element:<CreateStudent />
-            }, */
+            }
         ],
     }
 ]
 
 
-//!! 2. exported to the routesGenerators.ts user utils function to make it reusable for every routes
+//!! 2. exported to the routesGenerators.ts under utils function to make it reusable for every routes
 
 //! 2. pragmatical coded way of writing routes
 /* export const adminRoutes = adminPaths.reduce((acc:TRoute[],item)=>{
@@ -110,8 +105,9 @@ export const adminRoutes = [
   ]*/
 
 
+//!! 3. exported to the sidebarItemsGenerators.tsx under  utils function to make it reusable for every sidebar
 //!3. pragmatical coded way writing  adminSidebarItems based on the adminPaths 
-export const adminSidebarItems =  adminPaths.reduce((acc:TAdminSidebarItem[], item) => {
+/* export const adminSidebarItems =  adminPaths.reduce((acc:TAdminSidebarItem[], item) => {
     if (item.path && item.name) {
       acc.push({
         key: item.name,
@@ -132,7 +128,7 @@ export const adminSidebarItems =  adminPaths.reduce((acc:TAdminSidebarItem[], it
     }
   
     return acc;
-  }, []);
+  }, []); */
 
 
  //* Hard Coded adminSidebarItems  
