@@ -1,18 +1,14 @@
-import { Layout, Menu, MenuProps } from "antd";
-import {
-  UploadOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
-} from "@ant-design/icons";
-import { createElement } from "react";
-import { NavLink, Outlet } from "react-router-dom";
-import { adminPaths, adminSidebarItems } from "../../routes/admin.routes";
-import { sidebarItemsGenerators } from "../../utils/sidebarItemsGenerators";
+import { Button, Layout } from "antd";
+
+import { Outlet } from "react-router-dom";
+
 import Sidebar from "./Sidebar";
+import { useAppDispatch } from "../../redux/hooks";
+import { logout } from "../../redux/features/auth/authSlice";
 /* import Sider from "antd/es/layout/Sider";
 import { Content, Footer, Header } from "antd/es/layout/layout"; */
 
-const { Content, Footer, Header, Sider } = Layout;
+const { Content, Header } = Layout;
 
 /* const items = [
   UserOutlined,
@@ -33,7 +29,7 @@ const { Content, Footer, Header, Sider } = Layout;
  * iii. nested hole children props er modde asbe. Amra jodi akta drop down cai kono akta level er under e nested obostai taile amra children pros er modde array of object akare dite hobe. agar motoi protita object key,props hold korbe.
  */
 
- //* Hard Coded items
+//* Hard Coded items
 /** const items: MenuProps["items"] = [
   {
     key: "Dashboard",
@@ -60,12 +56,20 @@ const { Content, Footer, Header, Sider } = Layout;
 ]; */
 
 const MainLayout = () => {
+  
+  const dispatch = useAppDispatch();
+  const handleLogout = () => {
+    dispatch(logout());
+  };
+
   return (
     <Layout style={{ height: "100vh" }}>
       {/* // amra agar sider ke cut kore self contain Sidebar component e neya gasi  */}
-      <Sidebar/> 
+      <Sidebar />
       <Layout>
-        <Header style={{ padding: 0 }} />
+        <Header style={{ padding: 0 }}>
+          <Button onClick={handleLogout}>Logout</Button>
+        </Header>
         <Content style={{ margin: "24px 16px 0" }}>
           <div
             style={{

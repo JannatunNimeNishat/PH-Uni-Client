@@ -1,6 +1,8 @@
 import { Layout, Menu } from "antd";
 import { sidebarItemsGenerators } from "../../utils/sidebarItemsGenerators";
 import { adminPaths } from "../../routes/admin.routes";
+import { useAppSelector } from "../../redux/hooks";
+import { selectCurrentUser } from "../../redux/features/auth/authSlice";
 
 /**sidebar components
  * i. amra MainLayout teka <Sider part tuku ke cut kore acan e ana hoyce easy maintenatibility r jonno.
@@ -19,10 +21,11 @@ const userRole = {
 }
 
 const Sidebar = () => {
-    const role = 'admin';
+  const user = useAppSelector(selectCurrentUser);
+   // const role = 'admin';
     let sidebarItems;
 
-    switch (role) {
+    switch (user!.role) { // ! to avoid the error
         case userRole.ADMIN:
             sidebarItems= sidebarItemsGenerators(adminPaths,userRole.ADMIN)
             break;
