@@ -4,6 +4,7 @@ import CreateAdmin from "../pages/admin/CreateAdmin";
 import CreateFaculty from "../pages/admin/CreateFaculty";
 import CreateStudent from "../pages/admin/CreateStudent";
 import { NavLink } from "react-router-dom";
+import AcademicSemester from "../pages/admin/academicManagement/AcademicSemester";
 
 /* type TRoute = {
     path:string;
@@ -16,45 +17,52 @@ import { NavLink } from "react-router-dom";
 } */
 
 /** amra acna e dynamically adminSideBarItems r adminRoutes banasci jate kore ak jaigai change korlai (adminPaths) 2 jaiga tai update hoye jai. code maintability baranor jonno.
- * 
+ *
  * 1. amra common akta array banaiya nici (adminPaths) with the common elements of both adminRoutes and  adminSidebarItems neya. jate 2 adminSideBarItems r adminRoutes tai use korte pari
  * 2. amra amader format hishabe reduce deya agar hardcoded er format ta tik rekha adminRoutes ta create korteci
  * 3. aki vabe agar format tik rekha side bar ta create korteci.
- * 
- ***Note[ acon amra adminPaths e akta kore object add korbo r side bar a new item abong oi item er route o dynamically create hoye jabe ]  
+ *
+ ***Note[ acon amra adminPaths e akta kore object add korbo r side bar a new item abong oi item er route o dynamically create hoye jabe ]
  */
-
-
 
 //! 1. common array with the common elements of both adminRoutes and  adminSidebarItems
 export const adminPaths = [
-    {
-        name:'Dashboard',
-        path:'dashboard',
-        element:<AdminDashboard/>,
-    },
-    {
-        name:'User Management',
-        children:[
-            {
-                name:'Create Admin',
-                path:'create-admin',
-                element:<CreateAdmin />
-            },
-            {
-                name:'Create Faculty',
-                path:'create-faculty',
-                element:<CreateFaculty />
-            },
-            {
-                name:'Create Student',
-                path:'create-student',
-                element:<CreateStudent />
-            }
-        ],
-    }
-]
-
+  {
+    name: "Dashboard",
+    path: "dashboard",
+    element: <AdminDashboard />,
+  },
+  {
+    name: "Academic Management",
+    children: [
+      {
+        name: "Academic Semester",
+        path: "academic-semester",
+        element: <AcademicSemester />,
+      },
+    ],
+  },
+  {
+    name: "User Management",
+    children: [
+      {
+        name: "Create Admin",
+        path: "create-admin",
+        element: <CreateAdmin />,
+      },
+      {
+        name: "Create Faculty",
+        path: "create-faculty",
+        element: <CreateFaculty />,
+      },
+      {
+        name: "Create Student",
+        path: "create-student",
+        element: <CreateStudent />,
+      },
+    ],
+  },
+];
 
 //!! 2. exported to the routesGenerators.ts under utils function to make it reusable for every routes
 
@@ -77,7 +85,6 @@ export const adminPaths = [
    
     return acc;
 },[]) */
-
 
 //! hard-coded way of writing routes
 /*** 
@@ -104,9 +111,8 @@ export const adminRoutes = [
     },
   ]*/
 
-
 //!! 3. exported to the sidebarItemsGenerators.tsx under  utils function to make it reusable for every sidebar
-//!3. pragmatical coded way writing  adminSidebarItems based on the adminPaths 
+//!3. pragmatical coded way writing  adminSidebarItems based on the adminPaths
 /* export const adminSidebarItems =  adminPaths.reduce((acc:TAdminSidebarItem[], item) => {
     if (item.path && item.name) {
       acc.push({
@@ -130,8 +136,7 @@ export const adminRoutes = [
     return acc;
   }, []); */
 
-
- //* Hard Coded adminSidebarItems  
+//* Hard Coded adminSidebarItems
 /** const items: MenuProps["items"] = [
   {
     key: "Dashboard",
@@ -156,5 +161,3 @@ export const adminRoutes = [
     ],
   },
 ]; */
-
-
