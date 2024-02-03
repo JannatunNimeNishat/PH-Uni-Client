@@ -1,6 +1,14 @@
-import { BaseQueryApi, BaseQueryFn, DefinitionType, FetchArgs, createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import {
+  BaseQueryApi,
+  BaseQueryFn,
+  DefinitionType,
+  FetchArgs,
+  createApi,
+  fetchBaseQuery,
+} from "@reduxjs/toolkit/query/react";
 import { RootState } from "../store";
 import { logout, setUser } from "../features/auth/authSlice";
+import { toast } from "sonner";
 
 /** BASEQUERY indifferent page
  * i. baseApi er modde amra jodi endpoints gula tikte taki taile ai onk gula endpoint ase jabe. 
@@ -24,7 +32,7 @@ name e tahole acon incoming cookie ta browser er cookies e save hobe.
  * iii.prepareHeaders er callback  argument hishabe headers,{getState} ney. tar pore inside this call back getState()
  * function deya current auth state teka auth.token ta ber kora ane token variable e assign kore dici.
  * iv. acon token jodi take tahole amra headers er modde token take ke 'authorization' `${token}` deya set kore disci
- * 
+ *
  */
 
 /**AccessToken expire hoye gela RefreshToken deya call kora
@@ -42,56 +50,66 @@ name e tahole acon incoming cookie ta browser er cookies e save hobe.
  * iv. r sobar last e abar baseQuery ke call kora. Tar mane acon amra new je accessToken ta pasci saita deya call korteci sobr 1st e je api e 401 error astecilo. ->  result = baseQuery(args,api, extraOptions);
  */
 
-const baseQuery = fetchBaseQuery({ 
-  baseUrl: "http://localhost:5000/api/v1", 
-  credentials:'include', // to save the cookie
-  prepareHeaders:(headers,{getState})=>{ // assigning the accessToken for every api called. inside the headers authorization
+const baseQuery = fetchBaseQuery({
+  baseUrl: "http://localhost:5000/api/v1",
+  credentials: "include", // to save the cookie
+  prepareHeaders: (headers, { getState }) => {
+    // assigning the accessToken for every api called. inside the headers authorization
     const token = (getState() as RootState).auth.token;
-    if(token){
-      headers.set('authorization',`${token}`)
+    if (token) {
+      headers.set("authorization", `${token}`);
     }
     return headers;
-  } 
-})
+  },
+});
 
-
-const baseQueryWithRefreshToken : BaseQueryFn<FetchArgs,BaseQueryApi,DefinitionType> = async (args,api, extraOptions):Promise<any>=>{ // query gular response er upor vitti kore amra action nibo ei jonno ai layer ta create kora hoyce. axios interceptor er moto. 
-  let result = await baseQuery(args,api, extraOptions);
+const baseQueryWithRefreshToken: BaseQueryFn<
+  FetchArgs,
+  BaseQueryApi,
+  DefinitionType
+> = async (args, api, extraOptions): Promise<any> => {
+  // query gular response er upor vitti kore amra action nibo ei jonno ai layer ta create kora hoyce. axios interceptor er moto.
+  let result = await baseQuery(args, api, extraOptions);
   console.log(result);
 
-  if(result?.error?.status === 401){
+  // if user not found
+  if (result?.error?.status === 404) {
+    toast.error("User not found!");
+  }
+
+  if (result?.error?.status === 401) {
     //* Send Refresh token
-    console.log('sending refresh token');
-    const res = await fetch('http://localhost:5000/api/v1/auth/refresh-token',{
-      credentials:'include', // refersh token ta ase cookie er modde so -> credentials:'include' 
-      method:'POST'
-    })
+    console.log("sending refresh token");
+    const res = await fetch("http://localhost:5000/api/v1/auth/refresh-token", {
+      credentials: "include", // refersh token ta ase cookie er modde so -> credentials:'include'
+      method: "POST",
+    });
     const data = await res.json();
     console.log(data);
-    if(data?.data?.accessToken){
+    if (data?.data?.accessToken) {
       //console.log(data);
       const user = (api.getState() as RootState).auth.user;
-      api.dispatch(setUser({
-        user,
-        token:data?.data?.accessToken
-      }));
-      result = await baseQuery(args,api, extraOptions);
-    }else{
-// refresh-token jodi na ase response e. authoba refresh-token expire hosce jai. taile amra re-direct kore login e pathia dibo.
+      api.dispatch(
+        setUser({
+          user,
+          token: data?.data?.accessToken,
+        })
+      );
+      result = await baseQuery(args, api, extraOptions);
+    } else {
+      // refresh-token jodi na ase response e. authoba refresh-token expire hosce jai. taile amra re-direct kore login e pathia dibo.
       api.dispatch(logout());
     }
   }
 
-
   return result;
-}
+};
 
 export const baseApi = createApi({
   reducerPath: "baseApi",
   // baseQuery: baseQuery,
-  baseQuery: baseQueryWithRefreshToken, 
-  endpoints:() =>({}),
-
+  baseQuery: baseQueryWithRefreshToken,
+  endpoints: () => ({}),
 
   /* endpoints: (builder) => ({
     login: builder.mutation({
