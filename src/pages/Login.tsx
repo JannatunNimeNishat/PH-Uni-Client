@@ -24,7 +24,7 @@ const Login = () => {
   
   const defaultValues = {
     userId: "A-0001",
-    password: "admin12345",
+    password: "admin123",
   };
 
   const [login, { error }] = useLoginMutation();
