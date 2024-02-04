@@ -7,6 +7,13 @@ const academicManagement = baseApi.injectEndpoints({
         url: "/academic-semesters",
         method: "GET",
       }),
+      // data jokohn base hoye jabe tokon caile amra data ta ke transform kore amader moto kore nite pari. necessary data ke neya
+      transformResponse:(response)=>{
+        return {
+          data:response.data,
+          meta:response.meta
+        }
+      }
     }),
     addAcademicSemesters: builder.mutation({
       query: (data) => ({
