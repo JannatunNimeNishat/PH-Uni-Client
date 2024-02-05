@@ -1,19 +1,31 @@
+import { TQueryParam, TResponseRedux } from "../../../types";
+import { TAcademicSemester } from "../../../types/academicManagement.type";
 import { baseApi } from "../../api/baseApi";
 
 const academicManagement = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getAllAcademicSemesters: builder.query({
-      query: () => ({
-        url: "/academic-semesters",
-        method: "GET",
-      }),
-      // data jokohn base hoye jabe tokon caile amra data ta ke transform kore amader moto kore nite pari. necessary data ke neya
-      transformResponse:(response)=>{
-        return {
-          data:response.data,
-          meta:response.meta
+      query: (args) => {
+        const params = new URLSearchParams();
+        if(args){
+          args.forEach((item:TQueryParam) => {
+            params.append(item.name, item.value as string)
+          });
         }
-      }
+
+        return {
+          url: "/academic-semesters",
+          method: "GET",
+          params:params
+        }
+      },
+      // data jokohn base hoye jabe tokon caile amra data ta ke transform kore amader moto kore nite pari. necessary data ke neya
+      transformResponse: (response: TResponseRedux<TAcademicSemester[]>) => {
+        return {
+          data: response.data,
+          meta: response.meta,
+        };
+      },
     }),
     addAcademicSemesters: builder.mutation({
       query: (data) => ({

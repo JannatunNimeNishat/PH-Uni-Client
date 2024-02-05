@@ -70,7 +70,7 @@ const baseQueryWithRefreshToken: BaseQueryFn<
 > = async (args, api, extraOptions): Promise<any> => {
   // query gular response er upor vitti kore amra action nibo ei jonno ai layer ta create kora hoyce. axios interceptor er moto.
   let result = await baseQuery(args, api, extraOptions);
-  console.log(result);
+  //console.log(result);
 
   // if user not found
   if (result?.error?.status === 404) {
