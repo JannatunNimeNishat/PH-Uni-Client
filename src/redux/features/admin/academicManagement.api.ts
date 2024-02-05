@@ -7,17 +7,17 @@ const academicManagement = baseApi.injectEndpoints({
     getAllAcademicSemesters: builder.query({
       query: (args) => {
         const params = new URLSearchParams();
-        if(args){
-          args.forEach((item:TQueryParam) => {
-            params.append(item.name, item.value as string)
+        if (args) {
+          args.forEach((item: TQueryParam) => {
+            params.append(item.name, item.value as string);
           });
         }
 
         return {
           url: "/academic-semesters",
           method: "GET",
-          params:params
-        }
+          params: params,
+        };
       },
       // data jokohn base hoye jabe tokon caile amra data ta ke transform kore amader moto kore nite pari. necessary data ke neya
       transformResponse: (response: TResponseRedux<TAcademicSemester[]>) => {
@@ -36,12 +36,21 @@ const academicManagement = baseApi.injectEndpoints({
     }),
     addAcademicFaculty: builder.mutation({
       query: (data) => {
-        console.log('data inside api:',data);
+        console.log("data inside api:", data);
         return {
           url: "/academic-faculties/create-academic-faculty",
           method: "POST",
           body: data,
-        }
+        };
+      },
+    }),
+    getAllAcademicSemester: builder.query({
+      query: (args) => {
+       // const params = new URLSearchParams();
+        return {
+          url: "/academic-faculties",
+          method:"GET"
+        };
       },
     }),
   }),
@@ -50,5 +59,6 @@ const academicManagement = baseApi.injectEndpoints({
 export const {
   useGetAllAcademicSemestersQuery,
   useAddAcademicSemestersMutation,
-  useAddAcademicFacultyMutation
+  useAddAcademicFacultyMutation,
+  useGetAllAcademicSemesterQuery
 } = academicManagement;
