@@ -1,6 +1,13 @@
-import React from 'react';
+
+
+const  departmentData = [
+    {name:'Department of L1'}
+]
 
 const CreateAcademicDepartment = () => {
+    const departmentOptions = [
+        {name:'Department of L1'}
+    ]
     return (
         <div>
             CreateAcademicDepartment
