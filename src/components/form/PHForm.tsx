@@ -32,11 +32,18 @@ const PHForm = ({
     formConfig["resolver"] = resolver;
   }
   const methods = useForm(formConfig);
+  
+  //to reset/clear the form after submit
+  const submit:SubmitHandler<FieldValues> = (data) =>{
+    onSubmit(data);
+    methods.reset();
+  }
   return (
     <FormProvider {...methods}>
-      <Form layout="vertical" onFinish={methods.handleSubmit(onSubmit)}>
+      <Form layout="vertical" onFinish={methods.handleSubmit(submit)}>
         {children}
       </Form>
+      {/* <Form layout="vertical" onFinish={methods.handleSubmit(onSubmit)}> */}
       {/* <form onSubmit={methods.handleSubmit(onSubmit)}>{children}</form> */}
     </FormProvider>
   );
