@@ -1,15 +1,15 @@
 import { Button, Col, Divider, Form, Input, Row } from "antd";
-import PHForm from "../../components/form/PHForm";
-import PHInput from "../../components/form/PHInput";
+import PHForm from "../../../components/form/PHForm";
+import PHInput from "../../../components/form/PHInput";
 import { Controller, FieldValues, SubmitHandler } from "react-hook-form";
-import PHSelect from "../../components/form/PHSelect";
-import { bloodGroupOptions, genderOptions } from "../../constants/global";
-import PHDatePicker from "../../components/form/PHDatePicker";
+import PHSelect from "../../../components/form/PHSelect";
+import { bloodGroupOptions, genderOptions } from "../../../constants/global";
+import PHDatePicker from "../../../components/form/PHDatePicker";
 import {
   useGetAllAcademicDepartmentQuery,
   useGetAllAcademicSemestersQuery,
-} from "../../redux/features/admin/academicManagement.api";
-import { useAddStudentMutation } from "../../redux/features/admin/userManagement.api";
+} from "../../../redux/features/admin/academicManagement.api";
+import { useAddStudentMutation } from "../../../redux/features/admin/userManagement.api";
 import { toast } from "sonner";
 
 const studentDummyData = {
@@ -55,7 +55,7 @@ const studentDummyData = {
 //! should be removed
 const studentDefaultValues = {
   name: {
-    firstName: "I am ",
+    firstName: "Student3",
     middleName: "Student",
     lastName: "Number 1",
   },
@@ -116,7 +116,7 @@ const CreateStudent = () => {
     })
   );
 
-  const onSubmit: SubmitHandler<FieldValues> =  (data) => {
+  const onSubmit: SubmitHandler<FieldValues> = (data) => {
     const toastId = toast.loading("student creating....");
     console.log(data);
 
@@ -130,10 +130,7 @@ const CreateStudent = () => {
     formData.append("data", JSON.stringify(studentData));
     formData.append("file", data.image);
 
-
-   addStudent(formData);
-    
-  
+    addStudent(formData);
 
     // addStudent(formData);
     //! this is for development
