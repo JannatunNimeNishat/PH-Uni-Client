@@ -1,30 +1,31 @@
 import { Form, Select, Space } from "antd";
 import { Controller } from "react-hook-form";
 
-type TPHSelectProps ={
-    label:string;
-    name:string;
-    options:{value:string; label:string; disabled?:boolean}[];
-}
+type TPHSelectProps = {
+  label: string;
+  name: string;
+  options: { value: string; label: string; disabled?: boolean }[] | undefined;
+  disabled?:boolean
+};
 
-
-const PHSelect = ({ label,name,options }:TPHSelectProps) => {
+const PHSelect = ({ label, name, options, disabled }: TPHSelectProps) => {
   return (
     <Controller
-    name={name}
-      render={({field, fieldState:{error}}) => (
+      name={name}
+      render={({ field, fieldState: { error } }) => (
         <Form.Item label={label}>
           <Select
-          {...field}
+            {...field}
             style={{ width: "100%" }}
             options={options}
             size="large"
+            disabled={disabled}
           />
-        {error && <small style={{color:'red'}}>{error?.message}</small>}
+          {error && <small style={{ color: "red" }}>{error?.message}</small>}
         </Form.Item>
       )}
     />
-   /*  <Controller
+    /*  <Controller
     name={name}
       render={({field:{onChange}}) => (
         <Form.Item label={label}>
