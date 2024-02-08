@@ -4,6 +4,7 @@ import PHInput from "../../components/form/PHInput";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import PHSelect from "../../components/form/PHSelect";
 import { bloodGroupOptions, genderOptions } from "../../constants/global";
+import PHDatePicker from "../../components/form/PHDatePicker";
 
 const studentDummyData = {
   password: "student123",
@@ -79,7 +80,7 @@ const CreateStudent = () => {
               <PHSelect name="gender" label="Gender" options={genderOptions}/>
             </Col>
             <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
-              <PHInput type="text" name="dateOfBirth" label="DateOfBirth" />
+              <PHDatePicker  name="dateOfBirth" label="DateOfBirth" />
             </Col>
             <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
               {/* <PHInput type="text" name="bloogGroup" label="Blood Group" /> */}
