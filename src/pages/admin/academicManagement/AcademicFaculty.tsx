@@ -1,12 +1,12 @@
 import { Button, Table, TableColumnsType, TableProps } from 'antd';
 import React from 'react';
-import { useGetAllAcademicSemesterQuery } from '../../../redux/features/admin/academicManagement.api';
+import { useGetAllAcademicFacultiesQuery } from '../../../redux/features/admin/academicManagement.api';
 
 interface DataType {
     name: string;
   }
 const AcademicFaculty = () => {
-    const {data:academicSemesters, isLoading, isFetching} = useGetAllAcademicSemesterQuery(undefined)
+    const {data:academicSemesters, isLoading, isFetching} = useGetAllAcademicFacultiesQuery(undefined)
       
       const columns: TableColumnsType<DataType> = [
         {
