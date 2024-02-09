@@ -5,16 +5,18 @@ type TPHSelectProps = {
   label: string;
   name: string;
   options: { value: string; label: string; disabled?: boolean }[] | undefined;
-  disabled?:boolean
+  disabled?:boolean;
+  mode?:'multiple'| undefined;
 };
 
-const PHSelect = ({ label, name, options, disabled }: TPHSelectProps) => {
+const PHSelect = ({ label, name, options, disabled,mode }: TPHSelectProps) => {
   return (
     <Controller
       name={name}
       render={({ field, fieldState: { error } }) => (
         <Form.Item label={label}>
           <Select
+          mode={mode} // jodi mode ase taile multiple sellect hobe, r na asole normal sellect. mode = muliple | undefinded
             {...field}
             style={{ width: "100%" }}
             options={options}
