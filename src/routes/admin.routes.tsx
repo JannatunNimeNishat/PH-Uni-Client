@@ -11,6 +11,13 @@ import AcademicFaculty from "../pages/admin/academicManagement/AcademicFaculty";
 import CreateAcademicDepartment from "../pages/admin/academicManagement/CreateAcademicDepartment";
 import AcademicDepartment from "../pages/admin/academicManagement/AcademicDepartment";
 import StudentData from "../pages/admin/userManagement/StudentData";
+import StudentDetails from "../pages/admin/userManagement/StudentDetails";
+import SemesterRegistration from "../pages/admin/courseManagement/SemesterRegistration";
+import RegisteredSemester from "../pages/admin/courseManagement/RegisteredSemester";
+import CreateCourse from "../pages/admin/courseManagement/CreateCourse";
+import OfferCourses from "../pages/admin/courseManagement/OfferCourses";
+import OfferedCourses from "../pages/admin/courseManagement/OfferedCourses";
+import Courses from "../pages/admin/courseManagement/Courses";
 
 /* type TRoute = {
     path:string;
@@ -87,6 +94,10 @@ export const adminPaths = [
         element: <StudentData />,
       },
       {
+        path: "student-data/:studentId",
+        element: <StudentDetails />,
+      },
+      {
         name: "Create Admin",
         path: "create-admin",
         element: <CreateAdmin />,
@@ -98,6 +109,41 @@ export const adminPaths = [
       },
     ],
   },
+  {
+    name:'Course Management',
+    children:[
+      {
+        name:'Semester Registration',
+        path:'semester-registration',
+        element:<SemesterRegistration/>
+      },
+      {
+        name:'Registered Semester ',
+        path:'registration-semester',
+        element:<RegisteredSemester/>
+      },
+      {
+        name:'Create Course ',
+        path:'create-course',
+        element:<CreateCourse/>
+      },
+      {
+        name: 'Courses',
+        path: 'courses',
+        element: <Courses />,
+      },
+      {
+        name:'Offer Course ',
+        path:'offer-course',
+        element:<OfferCourses/>
+      },
+      {
+        name:'Offered Course ',
+        path:'offered-course',
+        element:<OfferedCourses/>
+      },
+    ]
+  }
 ];
 
 //!! 2. exported to the routesGenerators.ts under utils function to make it reusable for every routes
