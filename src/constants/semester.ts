@@ -8,3 +8,11 @@ export const academicSemesterOptions = [
   { value: "Faculty of Web Development", label: "Faculty of Web Development" },
   { value: "Faculty of Programming", label: "Faculty of Programming" },
 ];
+
+export const semesterStatusOptions = [
+  {value:'UPCOMING',label:'Upcoming'},
+  {value:'ONGOING',label:'Ongoing'},
+  {value:'ENDED',label:'Ended'},
+]
+
+
