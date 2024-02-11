@@ -21,17 +21,19 @@ const Login = () => {
       password: "admin12345",
     },
   }); */
-  
+
   const defaultValues = {
-    userId: "A-0001",
-    password: "admin123",
+    userId: "2024030001",
+    password: "student123",
+    /*  userId: "A-0001",
+    password: "admin123", */
   };
 
   const [login, { error }] = useLoginMutation();
   const dispatch = useAppDispatch();
 
   const onSubmit = async (data: { userId: string; password: string }) => {
-    const toastId =  toast.loading('Logging in');
+    const toastId = toast.loading("Logging in");
     try {
       const userInfo = {
         id: data.userId,
@@ -41,16 +43,15 @@ const Login = () => {
       const user = verifyToken(res.data.accessToken) as TUser;
       //console.log(userInfo,{ user: user, token: res.data.accessToken });
       dispatch(setUser({ user: user, token: res.data.accessToken }));
-      toast.success('Logged in',{id: toastId, duration:2000})
+      toast.success("Logged in", { id: toastId, duration: 2000 });
       navigate(`/${user.role}/dashboard`);
     } catch (error) {
-    
-      toast.error('Something went wrong',{id:toastId,duration:2000})
+      toast.error("Something went wrong", { id: toastId, duration: 2000 });
     }
   };
 
   return (
-    <Row justify={"center"} align={"middle"} style={{height:'100vh'}}>
+    <Row justify={"center"} align={"middle"} style={{ height: "100vh" }}>
       <PHForm onSubmit={onSubmit} defaultValues={defaultValues}>
         <PHInput type={"text"} name={"userId"} label={"ID: "} />
 

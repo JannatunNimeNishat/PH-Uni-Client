@@ -55,27 +55,31 @@ const academicManagement = baseApi.injectEndpoints({
       },
     }),
     getAllAcademicDepartment: builder.query({
-      query:(args)=>{
-        return{
-          url:'/academic-departments',
-          methods:'POST'
-        }
-      }
+      query: (args) => {
+        return {
+          url: "/academic-departments",
+          methods: "GET",
+        };
+      },
     }),
     addAcademicDepartment: builder.mutation({
       query: (data) => ({
         url: "/academic-departments/create-academic-department",
-        method:"POST"
+        method: "POST",
       }),
     }),
+   
+    
+  
+
   }),
 });
 
 export const {
- useGetAllAcademicSemestersQuery,
+  useGetAllAcademicSemestersQuery,
   useAddAcademicSemestersMutation,
   useAddAcademicFacultyMutation,
-useGetAllAcademicFacultiesQuery,
+  useGetAllAcademicFacultiesQuery,
   useGetAllAcademicDepartmentQuery,
-  useAddAcademicDepartmentMutation
+  useAddAcademicDepartmentMutation,
 } = academicManagement;
