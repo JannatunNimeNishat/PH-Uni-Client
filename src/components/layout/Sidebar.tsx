@@ -7,16 +7,11 @@ import { studentPaths } from "../../routes/student.routes";
 import { facultyPaths } from "../../routes/faculty.routes";
 import { verifyToken } from "../../utils/verifyToken";
 
-/**sidebar components
- * i. amra MainLayout teka <Sider part tuku ke cut kore acan e ana hoyce easy maintenatibility r jonno.
- * ii. amra user er role er upor base kora take content dekhabo oi joono rolte ta ke alada alada kore define kore neya hosce
- * 
- */
 
 
 const { Sider } = Layout;
 
-// defining the roles
+
 const userRole = {
     ADMIN:'admin',
     FACULTY:'faculty',
@@ -31,7 +26,7 @@ const Sidebar = () => {
   }
     let sidebarItems;
 
-    switch ((user as TUser)!.role) { // ! to avoid the error
+    switch ((user as TUser)!.role) { 
         case userRole.ADMIN:
           
             sidebarItems= sidebarItemsGenerators(adminPaths,userRole.ADMIN)
