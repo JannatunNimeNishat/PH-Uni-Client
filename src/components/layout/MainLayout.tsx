@@ -63,7 +63,6 @@ const MainLayout = () => {
 
   return (
     <Layout style={{ height: "100%" }}>
-      {/* // amra agar sider ke cut kore self contain Sidebar component e neya gasi  */}
       <Sidebar />
       <Layout>
         <Header style={{ padding: 0 }}>

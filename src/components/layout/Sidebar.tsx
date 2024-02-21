@@ -66,7 +66,6 @@ const Sidebar = () => {
           theme="dark"
           mode="inline"
           defaultSelectedKeys={["4"]}
-          // items={adminSidebarItems} //! pragmatical items
           items={sidebarItems} //! pragmatical items
         />
       </Sider>
