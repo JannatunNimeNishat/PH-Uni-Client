@@ -5,8 +5,7 @@ import { Outlet } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import { useAppDispatch } from "../../redux/hooks";
 import { logout } from "../../redux/features/auth/authSlice";
-/* import Sider from "antd/es/layout/Sider";
-import { Content, Footer, Header } from "antd/es/layout/layout"; */
+
 
 const { Content, Header } = Layout;
 
@@ -75,7 +74,7 @@ const MainLayout = () => {
               minHeight: 360,
             }}
           >
-            {/* content */}
+          
             {/* <h1>The main content should go here</h1> */}
             <Outlet />
           </div>
