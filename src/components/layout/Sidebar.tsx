@@ -47,13 +47,18 @@ const Sidebar = () => {
 
     return (
         <Sider
+        theme="light"
         breakpoint="lg"
         collapsedWidth="0"
-        style={{height:"100vh", position:'sticky', top:'0', left:'0'}}
+        style={{height:"100vh", position:'sticky', top:'0', left:'0',
+        display: 'flex',
+        flexDirection: 'column',
+
+        }}
       >
-        <div
+       <div
           style={{
-            color: "white",
+           // color: "white",
             height: "4rem",
             display: "flex",
             justifyContent: "center",
@@ -62,12 +67,24 @@ const Sidebar = () => {
         >
           <h1>PH University</h1>
         </div>
+        <div
+        style={{flexGrow:1,border:"1px solid red",
+          minHeight:"100%"
+
+        }}
+        >
         <Menu
-          theme="dark"
+       
+          theme="light"
           mode="inline"
           defaultSelectedKeys={["4"]}
           items={sidebarItems} //! pragmatical items
         />
+           </div>
+        <div style={{ borderTop: "1px solid red", padding: '1rem 0', textAlign: 'center' }}>
+          <h1>PH Corporation</h1>
+        </div>
+     
       </Sider>
     );
 };

@@ -24,7 +24,9 @@ export const sidebarItemsGenerators = (items: TUserPath[], role: string) => {
             return {
               key: child.name,
               label: (
-                <NavLink to={`/${role}/${child.path}`}>{child.name}</NavLink>
+                <NavLink
+                
+                to={`/${role}/${child.path}`}>{child.name}</NavLink>
               ),
             };
           }
